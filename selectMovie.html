@@ -4,9 +4,138 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>selectMovie</title>
+    <style>
+        div{
+             margin: 0 auto;
+        }
+        
+        .user_interface{
+            width:100%;
+        }
+
+        .bar{
+            cursor: pointer;
+            width: 30px;
+            display: flex;
+            justify-self: right;
+            padding-right: 300px;
+        }
+
+        .movies{
+            margin-top: 100px;
+            width: 60%;
+            display: flex;
+            justify-self: center;
+            overflow: hidden;
+        }
+
+        .movie{
+            width: 250px;
+            padding: 10px;
+        }
+
+        #movie1,#movie3{
+            margin-top: 60px;
+            width: 250px;
+            cursor: pointer;
+        }
+
+        #movie1{
+            visibility: hidden;
+        }
+        
+        #movie2{
+            width: 300px;
+            cursor: pointer;
+        }
+
+        #prev, #next{
+            width : 50px;
+            height: 50px;
+        }
+
+        button{
+            margin-left: 51px;
+            margin-top: 200px;
+            background-color: unset;
+            height: 70px;
+            cursor: pointer;
+        }
+
+        #movieDetails{
+            text-align: center;
+        }
+
+        #buy{
+            margin-left: 48px;
+            width: 60px;
+            cursor: pointer;
+        }
+        
+        #info{
+            width: 300px;
+            background-color: gray;
+            height: 70px; 
+        }
+        
+    </style>
 </head>
 <body>
+    <div>
+        <div id = "user_interface">
+            <img  id = "ticket" class = "bar" src = "icons/ticket.png"> 
+        </div>
+        <div class = "movies">
+            <div class="movie">
+                <img id = "movie1" src = "">
+            </div>
+            <button><img id="prev" src="icons/prev.png"></button>
+            <div class="movie">
+                <img id = "movie2" src = "movies/movie1.png">
+                <div id = "movieDetails">
+                    <div id = "info">
+                    </div>
+                    <img id="buy" src="icons/buy.png">
+                </div>
+            </div>
+            <button><img id="next" src="icons/next.png"></button>
+            <div class="movie">
+                <img id = "movie3" src = "movies/movie2.png">
+            </div>
+        </div>
+    </div>
 
-    
+<script src="dataset.js"></script>
+
+<script>
+    let ticket = document.getElementById("ticket");
+
+    let loginStatus = localStorage.getItem('loginMember');
+
+    ticket.addEventListener('click',function(){
+        if(loginStatus==""){
+            let logincheck = confirm("로그인이 필요한 서비스입니다! 로그인해 주세요");
+            if(logincheck){
+                window.open('login.html','_blank','width=320px,height=320px,scrollbars=no,top=200,left=800');
+            }
+        }else{
+            
+        let userDB = JSON.parse(localStorage.getItem('users')); 
+        
+        let loginedUser = userDB.map((i)=>{
+            if(i['id']==loginStatus){
+                if(i['tickets']!=""){
+                    window.location.href = "showMovieTicket.html";
+                }else{
+                    alert("구매한 티켓 정보가 없습니다");
+                }
+            }
+        })
+
+        }
+    })
+
+</script>
+
 </body>
 </html>
