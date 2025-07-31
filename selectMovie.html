@@ -49,16 +49,16 @@
             cursor: pointer;
         }
 
-        #prev, #next{
-            width : 50px;
-            height: 50px;
+        .btnImg{
+            width : 40px;
+            height: 40px;
         }
 
         button{
             margin-left: 51px;
             margin-top: 200px;
             background-color: unset;
-            height: 70px;
+            height: 60px;
             cursor: pointer;
         }
 
@@ -89,7 +89,7 @@
             <div class="movie">
                 <img id = "movie1" src = "">
             </div>
-            <button><img id="prev" src="icons/prev.png"></button>
+            <button id = "prev"><img class = "btnImg" src="icons/prev.png"></button>
             <div class="movie">
                 <img id = "movie2" src = "movies/movie1.png">
                 <div id = "movieDetails">
@@ -98,7 +98,7 @@
                     <img id="buy" src="icons/buy.png">
                 </div>
             </div>
-            <button><img id="next" src="icons/next.png"></button>
+            <button id="next"><img class = "btnImg" src="icons/next.png"></button>
             <div class="movie">
                 <img id = "movie3" src = "movies/movie2.png">
             </div>
@@ -108,9 +108,29 @@
 <script src="dataset.js"></script>
 
 <script>
-    let ticket = document.getElementById("ticket");
-
     let loginStatus = localStorage.getItem('loginMember');
+    let curMovies = JSON.parse(localStorage.getItem('curMovies')); 
+
+    let ticket = document.getElementById("ticket");
+    let movie1 = document.getElementById("movie1");
+    let movie2 = document.getElementById("movie2");
+    let movie3 = document.getElementById("movie3");
+    let next = document.getElementById("next");
+    let index = 0;
+   
+    next.addEventListener('click',function(){
+        console.log(movie2.style.src);
+        movie1.src = curMovies[index]['poster'];
+        movie1.style.visibility = 'visible';
+        movie2.src = curMovies[index+1]['poster'];
+        if(index == 3){
+            next.style.visibility = 'hidden';
+            movie3.style.visibility = 'hidden';
+        }else{
+            movie3.src = curMovies[index+2]['poster'];
+        }
+        index++;
+    })
 
     ticket.addEventListener('click',function(){
         if(loginStatus==""){
