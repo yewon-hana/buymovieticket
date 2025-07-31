@@ -18,12 +18,12 @@
             width: 30px;
             display: flex;
             justify-self: right;
-            padding-right: 300px;
+            padding-right: 200px;
         }
 
         .movies{
             margin-top: 100px;
-            width: 60%;
+            width: 100%;
             display: flex;
             justify-self: center;
             overflow: hidden;
@@ -74,10 +74,17 @@
         
         #info{
             width: 300px;
-            background-color: gray;
             height: 70px; 
         }
         
+        #prev{
+            visibility: hidden;
+        }
+
+        #shortInfo{
+            font-size: small;
+        }
+
     </style>
 </head>
 <body>
@@ -94,6 +101,7 @@
                 <img id = "movie2" src = "movies/movie1.png">
                 <div id = "movieDetails">
                     <div id = "info">
+                        <img id="ageImg"> <span id = "shortInfo"></span>
                     </div>
                     <img id="buy" src="icons/buy.png">
                 </div>
@@ -116,12 +124,39 @@
     let movie2 = document.getElementById("movie2");
     let movie3 = document.getElementById("movie3");
     let next = document.getElementById("next");
+    let prev = document.getElementById("prev");
+    let buy = document.getElementById("buy");
+    let shortInfo = document.getElementById("shortInfo");
+    let ageImg = document.getElementById("ageImg");
     let index = 0;
+
+    prev.onmouseover = btnHover;
+    next.onmouseover = btnHover;
+    prev.onmouseout = btnDown;
+    next.onmouseout = btnDown;
+
+
+    ageFor();
    
+    function ageFor(){
+        ageImg.src = curMovies[index]['age'];
+        shortInfo.innerText =  curMovies[index]['shortInfo'];
+    }
+
+    function btnHover(){
+        this.style.backgroundColor = 'lightgray';
+    }
+
+    function btnDown(){
+        this.style.backgroundColor = 'white';
+    }
+
     next.addEventListener('click',function(){
-        console.log(movie2.style.src);
+        if(index ==0){
+            movie1.style.visibility = 'visible';
+            prev.style.visibility = 'visible';
+        }
         movie1.src = curMovies[index]['poster'];
-        movie1.style.visibility = 'visible';
         movie2.src = curMovies[index+1]['poster'];
         if(index == 3){
             next.style.visibility = 'hidden';
@@ -130,7 +165,35 @@
             movie3.src = curMovies[index+2]['poster'];
         }
         index++;
+        ageFor();
     })
+
+    prev.addEventListener('click',()=>{
+        if(index==4){
+            movie3.style.visibility = 'visible';
+            next.style.visibility = 'visible';
+        }
+        movie3.src = curMovies[index]['poster'];
+        movie2.src = curMovies[index-1]['poster'];
+        if(index==1){
+            prev.style.visibility = 'hidden';
+            movie1.style.visibility = 'hidden';        
+        }else{
+            movie1.src = curMovies[index-2]['poster'];
+        }
+        index--;
+        ageFor();
+    })
+
+    movie2.onclick = function(){
+        localStorage.setItem('selectedMovie',curMovies[index]['id']);
+        window.location.href = "movieInfo.html";
+    }
+
+    // buy.addEventListener('click',function(){
+    //     window.location.href = 
+    //     localStorage.setItem('selectedMovie',curMovies[index]['id']);
+    // })
 
     ticket.addEventListener('click',function(){
         if(loginStatus==""){
