@@ -1,4 +1,4 @@
-let loginStatus = localStorage.getItem('loginMember');
+    let loginStatus = localStorage.getItem('loginMember');
     let curMovies = JSON.parse(localStorage.getItem('curMovies')); 
 
     let ticket = document.getElementById("ticket");
@@ -12,12 +12,13 @@ let loginStatus = localStorage.getItem('loginMember');
     let ageImg = document.getElementById("ageImg");
     let index = 0;
 
+    //버튼 hover 이벤트
     prev.onmouseover = btnHover;
     next.onmouseover = btnHover;
     prev.onmouseout = btnDown;
     next.onmouseout = btnDown;
 
-
+    //영화 정보 표시
     ageFor();
    
     function ageFor(){
@@ -33,6 +34,7 @@ let loginStatus = localStorage.getItem('loginMember');
         this.style.backgroundColor = 'white';
     }
 
+    //index값에 맞는 영화 순서 바꾸기
     next.addEventListener('click',function(){
         if(index ==0){
             movie1.style.visibility = 'visible';
@@ -67,21 +69,27 @@ let loginStatus = localStorage.getItem('loginMember');
         ageFor();
     })
 
+    //중앙의 영화 클릭하면 상세 페이지로 넘어가기
     movie2.onclick = function(){
         localStorage.setItem('selectedMovie',curMovies[index]['id']);
         window.location.href = "movieInfo.html";
     }
 
-    // buy.addEventListener('click',function(){
-    //     window.location.href = 
-    //     localStorage.setItem('selectedMovie',curMovies[index]['id']);
-    // })
+    //예매하기 누르면 상영관 선택 화면으로 이동
+    buy.addEventListener('click',function(){
+        window.location.href = "selectDateTimeTheater.html";
+        localStorage.setItem('selectedMovie',curMovies[index]['id']);
+    })
 
+    //상단의 티켓을 누르면
+    //로그인 상태 : 예매한 티켓 표시
+    //로그아웃 상태 : 로그인 페이지로 이동 (confirm)
     ticket.addEventListener('click',function(){
         if(loginStatus==""){
             let logincheck = confirm("로그인이 필요한 서비스입니다! 로그인해 주세요");
             if(logincheck){
-                window.open('login.html','_blank','width=320px,height=320px,scrollbars=no,top=200,left=800');
+                //window.open('login.html','_blank','width=320px,height=320px,scrollbars=no,top=200,left=800');
+                window.location.href = "login.html";
             }
         }else{
             
