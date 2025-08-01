@@ -4,9 +4,221 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>selectMovie</title>
+    <style>
+        div{
+             margin: 0 auto;
+        }
+        
+        .user_interface{
+            width:100%;
+        }
+
+        .bar{
+            cursor: pointer;
+            width: 30px;
+            display: flex;
+            justify-self: right;
+            padding-right: 200px;
+        }
+
+        .movies{
+            margin-top: 100px;
+            width: 100%;
+            display: flex;
+            justify-self: center;
+            overflow: hidden;
+        }
+
+        .movie{
+            width: 250px;
+            padding: 10px;
+        }
+
+        #movie1,#movie3{
+            margin-top: 60px;
+            width: 250px;
+            cursor: pointer;
+        }
+
+        #movie1{
+            visibility: hidden;
+        }
+        
+        #movie2{
+            width: 300px;
+            cursor: pointer;
+        }
+
+        .btnImg{
+            width : 40px;
+            height: 40px;
+        }
+
+        button{
+            margin-left: 51px;
+            margin-top: 200px;
+            background-color: unset;
+            height: 60px;
+            cursor: pointer;
+        }
+
+        #movieDetails{
+            text-align: center;
+        }
+
+        #buy{
+            margin-left: 48px;
+            width: 60px;
+            cursor: pointer;
+        }
+        
+        #info{
+            width: 300px;
+            height: 70px; 
+        }
+        
+        #prev{
+            visibility: hidden;
+        }
+
+        #shortInfo{
+            font-size: small;
+        }
+
+    </style>
 </head>
 <body>
+    <div>
+        <div id = "user_interface">
+            <img  id = "ticket" class = "bar" src = "icons/ticket.png"> 
+        </div>
+        <div class = "movies">
+            <div class="movie">
+                <img id = "movie1" src = "">
+            </div>
+            <button id = "prev"><img class = "btnImg" src="icons/prev.png"></button>
+            <div class="movie">
+                <img id = "movie2" src = "movies/movie1.png">
+                <div id = "movieDetails">
+                    <div id = "info">
+                        <img id="ageImg"> <span id = "shortInfo"></span>
+                    </div>
+                    <img id="buy" src="icons/buy.png">
+                </div>
+            </div>
+            <button id="next"><img class = "btnImg" src="icons/next.png"></button>
+            <div class="movie">
+                <img id = "movie3" src = "movies/movie2.png">
+            </div>
+        </div>
+    </div>
 
-    
+<script src="dataset.js"></script>
+
+<script>
+    let loginStatus = localStorage.getItem('loginMember');
+    let curMovies = JSON.parse(localStorage.getItem('curMovies')); 
+
+    let ticket = document.getElementById("ticket");
+    let movie1 = document.getElementById("movie1");
+    let movie2 = document.getElementById("movie2");
+    let movie3 = document.getElementById("movie3");
+    let next = document.getElementById("next");
+    let prev = document.getElementById("prev");
+    let buy = document.getElementById("buy");
+    let shortInfo = document.getElementById("shortInfo");
+    let ageImg = document.getElementById("ageImg");
+    let index = 0;
+
+    prev.onmouseover = btnHover;
+    next.onmouseover = btnHover;
+    prev.onmouseout = btnDown;
+    next.onmouseout = btnDown;
+
+
+    ageFor();
+   
+    function ageFor(){
+        ageImg.src = curMovies[index]['age'];
+        shortInfo.innerText =  curMovies[index]['shortInfo'];
+    }
+
+    function btnHover(){
+        this.style.backgroundColor = 'lightgray';
+    }
+
+    function btnDown(){
+        this.style.backgroundColor = 'white';
+    }
+
+    next.addEventListener('click',function(){
+        if(index ==0){
+            movie1.style.visibility = 'visible';
+            prev.style.visibility = 'visible';
+        }
+        movie1.src = curMovies[index]['poster'];
+        movie2.src = curMovies[index+1]['poster'];
+        if(index == 3){
+            next.style.visibility = 'hidden';
+            movie3.style.visibility = 'hidden';
+        }else{
+            movie3.src = curMovies[index+2]['poster'];
+        }
+        index++;
+        ageFor();
+    })
+
+    prev.addEventListener('click',()=>{
+        if(index==4){
+            movie3.style.visibility = 'visible';
+            next.style.visibility = 'visible';
+        }
+        movie3.src = curMovies[index]['poster'];
+        movie2.src = curMovies[index-1]['poster'];
+        if(index==1){
+            prev.style.visibility = 'hidden';
+            movie1.style.visibility = 'hidden';        
+        }else{
+            movie1.src = curMovies[index-2]['poster'];
+        }
+        index--;
+        ageFor();
+    })
+
+    movie2.onclick = function(){
+        localStorage.setItem('selectedMovie',curMovies[index]['id']);
+        window.location.href = "movieInfo.html";
+    }
+
+    // buy.addEventListener('click',function(){
+    //     window.location.href = 
+    //     localStorage.setItem('selectedMovie',curMovies[index]['id']);
+    // })
+
+    ticket.addEventListener('click',function(){
+        if(loginStatus==""){
+            let logincheck = confirm("로그인이 필요한 서비스입니다! 로그인해 주세요");
+            if(logincheck){
+                window.open('login.html','_blank','width=320px,height=320px,scrollbars=no,top=200,left=800');
+            }
+        }else{
+            
+        let userDB = JSON.parse(localStorage.getItem('users')); 
+        
+        let loginedUser = userDB.map((i)=>{
+            if(i['id']==loginStatus){
+                if(i['tickets']!=""){
+                    window.location.href = "showMovieTicket.html";
+                }else{
+                    alert("구매한 티켓 정보가 없습니다");
+                }
+            }
+        })
+
+        }
+    })
+
+</script>
+
 </body>
 </html>
