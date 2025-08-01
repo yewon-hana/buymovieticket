@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 3px solid rgb(255, 255, 255);
+            letter-spacing: 1px;
+            font-size: 0.8rem;
+        }
+        td{
+            border: 5px solid rgb(255, 255, 255);
+            padding: 10px 10px;
+            text-align: center;
+            background-color: rgb(107, 0, 128);
+            color: white;
+        }   
+        #screen{
+            width: 358.1px;
+            height: 40px;
+            background-color: lightgray;
+            text-align: center;
+        }
+        #selectedSeats{
+            width: 358.1px;
+            height: 40px;
+            border: 1px solid black;
+        }        
+        .selectedSeatTd{
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <div id="container1">
+
+    </div>
+    <div id="container2"> 
+
+        <div id="screen">screen</div> 
+
+        <table id="seats"> 
+        <!--좌석 tr, td-->            
+        </table>
+
+        <div id="selectedSeats">
+        <!--선택된 좌석 id 출력-->
+        </div>
+
+        <button id="seatsEnd" onclick='seatsEnd()'>결제하기</button>
+
+    </div>
+
+<script>
+    import MemberInfo from "selectMemberNum.html"
+    // seats 테이블 내에 ABCD로 구분되는 tr과 1234로 구분되는 td 생성
+    let seats = document.getElementById('seats');
+    let abcd = ['A','B','C','D','E','F','G','H'];
+
+    for (let i=0 ; i<abcd.length ; i++){
+        let tr = document.createElement('tr');
+        tr.setAttribute('id',abcd[i]);
+        seats.appendChild(tr);
+    }
+    for (let i=0 ; i<abcd.length ; i++){
+        for (let n=0 ; n<abcd.length ; n++){
+            let td = document.createElement('td');
+            td.setAttribute('id',`${abcd[i]}${n+1}`);
+            td.innerHTML = `${abcd[i]}${n+1}`;
+            document.getElementById(abcd[i]).appendChild(td);
+        }
+    }
+
+    // 좌석명 출력할 div 영역
+    let getMemberInfo = new URLSearchParams(location.search);
+    let memberInfo = getMemberInfo.get('memberInfo');
+    // 클릭 > 클래스 토글 > map으로 좌석명만 추출 > selectedSeats에 출력
+    seats.addEventListener('click',(e)=>{
+        e.target.classList.toggle('selectedSeatTd');
+        let tdCollection = document.getElementsByClassName('selectedSeatTd');
+        let selectedSeatId = [...tdCollection].map((td)=>` ${td.id} `);
+        selectedSeats.innerText = selectedSeatId;
+    });
+
+</script>
+</body>
+</html>
