@@ -1,0 +1,79 @@
+div{
+             margin: 0 auto;
+        }
+        
+        .user_interface{
+            width:100%;
+        }
+
+        .bar{
+            cursor: pointer;
+            width: 30px;
+            display: flex;
+            justify-self: right;
+            padding-right: 200px;
+        }
+
+        .movies{
+            margin-top: 100px;
+            width: 100%;
+            display: flex;
+            justify-self: center;
+            overflow: hidden;
+        }
+
+        .movie{
+            width: 250px;
+            padding: 10px;
+        }
+
+        #movie1,#movie3{
+            margin-top: 60px;
+            width: 250px;
+            cursor: pointer;
+        }
+
+        #movie1{
+            visibility: hidden;
+        }
+        
+        #movie2{
+            width: 300px;
+            cursor: pointer;
+        }
+
+        .btnImg{
+            width : 40px;
+            height: 40px;
+        }
+
+        button{
+            margin-left: 51px;
+            margin-top: 200px;
+            background-color: unset;
+            height: 60px;
+            cursor: pointer;
+        }
+
+        #movieDetails{
+            text-align: center;
+        }
+
+        #buy{
+            margin-left: 48px;
+            width: 60px;
+            cursor: pointer;
+        }
+        
+        #info{
+            width: 300px;
+            height: 50px; 
+        }
+        
+        #prev{
+            visibility: hidden;
+        }
+
+        #shortInfo{
+            font-size: small;
+        }
