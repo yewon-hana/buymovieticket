@@ -1,12 +1,12 @@
-div{
-             margin: 0 auto;
-        }
-        
-        .user_interface{
-            width:100%;
+        div {
+            margin: 0 auto;
         }
 
-        .bar{
+        .user_interface {
+            width: 100%;
+        }
+
+        .bar {
             cursor: pointer;
             width: 30px;
             display: flex;
@@ -14,7 +14,7 @@ div{
             padding-right: 200px;
         }
 
-        .movies{
+        .movies {
             margin-top: 100px;
             width: 100%;
             display: flex;
@@ -22,58 +22,66 @@ div{
             overflow: hidden;
         }
 
-        .movie{
+        .movie {
             width: 250px;
             padding: 10px;
         }
 
-        #movie1,#movie3{
+        #movie1,
+        #movie3 {
             margin-top: 60px;
             width: 250px;
             cursor: pointer;
+            border-radius: 20px;
         }
 
-        #movie1{
+        #movie1 {
             visibility: hidden;
         }
-        
-        #movie2{
+
+        #movie2 {
             width: 300px;
             cursor: pointer;
+            border-radius: 20px;            
         }
 
-        .btnImg{
-            width : 40px;
+        .btnImg {
+            width: 40px;
             height: 40px;
         }
 
-        button{
+        button {
             margin-left: 51px;
             margin-top: 200px;
             background-color: unset;
             height: 60px;
             cursor: pointer;
+            border-radius: 20px;
         }
 
-        #movieDetails{
+        #movieDetails {
             text-align: center;
         }
 
-        #buy{
+        #buy {
             margin-left: 48px;
             width: 60px;
             cursor: pointer;
         }
-        
-        #info{
+
+        #info {
             width: 300px;
-            height: 50px; 
+            height: 50px;
         }
-        
-        #prev{
+
+        #prev {
             visibility: hidden;
         }
 
-        #shortInfo{
+        #shortInfo {
             font-size: small;
+        }
+        #ageImg{
+            width: 30px;
+            margin-top: 5px;
         }

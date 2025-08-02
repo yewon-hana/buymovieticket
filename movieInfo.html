@@ -4,8 +4,125 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MovieInfo</title>
+    <style>
+        .mvMargin{
+            display: block;
+            text-align: center;
+        }
+
+        .mvInfomain {
+            display: flex;
+            justify-self: center;
+            padding: 10px;
+            border: 3px solid darkgray;
+            border-radius: 20px;
+        }
+
+        #selectedMoviePoster{
+            width : 400px;
+            height: fit-content;
+            padding: 18px;
+        }
+
+        #movieDetails{
+            width :420px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .buy{
+            width: 70px;
+        }
+
+        #mvbuy{
+            width: 70px;
+            background-color: unset;
+            border: 0px;
+        }
+
+        #mvImages{
+            width: 350px;
+            height: 200px;
+            /* background-color: aqua; */
+            overflow: auto;
+            white-space: nowrap;
+            padding: 30px;
+        }
+
+        #forw{
+            cursor: pointer;
+            width: 30px;
+            display: flex;
+            justify-self: right;
+            padding-right: 200px;
+        }
+
+        .still{
+            height:200px;
+        }
+
+    </style>
 </head>
 <body>
-    
+    <img src="/icons/forward.png" id = "forw">
+    <div class = "mvMargin">
+        <div class = "mvInfomain">
+        <img id ="selectedMoviePoster"src ="">
+        <div id = "movieDetails">
+            <div id = "mvImages">
+                <img class ="still" src = "">
+                <img class ="still" src = "">
+                <img class ="still" src = "">
+                <img class ="still" src = "">
+                <img class ="still" src = "">
+                <img class ="still" src = "">
+                <img class ="still" src = "">
+            </div>
+        </div>
+    </div>
+    <button id = "mvbuy"><img src="/icons/buy.png" class = "buy"></button>
+     </div>
+     
+    <script>
+        let mvId = localStorage.getItem("selectedMovie");
+        let mvObj = JSON.parse(localStorage.getItem('curMovies')); 
+        let selected = mvObj[mvId];
+
+        let forw = document.getElementById("forw");
+        let mvPos = document.getElementById("selectedMoviePoster");
+        let mvImgs = document.getElementById("mvImages");
+        let stills = document.getElementsByClassName("still");
+        let mvDetl = document.getElementById("movieDetails");
+
+        let mvTitle = document.createElement("h2");
+        let mvShortInfo = document.createElement("h5");
+        let mvLongInfo = document.createElement("p");
+
+        let buybtn = document.getElementById("mvbuy");
+
+        mvPos.src = selected['poster'];
+        for(let i =0; i<stills.length;i++){
+            console.log(stills[i]);
+            console.log(selected['s']);
+            // stills[i].src=selected['still'][i];
+        }
+        mvTitle.innerText = selected['title'];
+        mvShortInfo.innerHTML = `<img src="${selected['age']}", style="width:20px;"> ${selected['shortInfo']}`;
+        mvLongInfo.innerHTML = selected['longInfo'];
+
+        mvDetl.appendChild(mvTitle);
+        mvDetl.appendChild(mvShortInfo);
+        mvDetl.appendChild(mvLongInfo);
+
+        forw.addEventListener('click',()=>{
+            localStorage.setItem("selectedMovie","");
+            window.location.href="selectMovie.html";
+        })
+
+        buybtn.addEventListener('click',()=>{
+            window.location.href = "selectDateTimeTheater.html";
+        })
+
+    </script>
 </body>
 </html>
