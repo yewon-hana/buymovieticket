@@ -1,0 +1,56 @@
+.mvMargin{
+            display: block;
+            text-align: center;
+        }
+
+        .mvInfomain {
+            display: flex;
+            justify-self: center;
+            padding: 10px;
+            border: 3px solid darkgray;
+            border-radius: 20px;
+        }
+
+        #selectedMoviePoster{
+            width : 400px;
+            height: fit-content;
+            padding: 18px;
+        }
+
+        #movieDetails{
+            width :420px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        .buy{
+            width: 70px;
+        }
+
+        #mvbuy{
+            width: 70px;
+            background-color: unset;
+            border: 0px;
+        }
+
+        #mvImages{
+            width: 350px;
+            height: 250px;
+            /* background-color: aqua; */
+            overflow: scroll;
+            white-space: nowrap;
+            padding: 2px;
+        }
+
+        #forw{
+            cursor: pointer;
+            width: 30px;
+            display: flex;
+            justify-self: right;
+            padding-right: 200px;
+        }
+
+        .still{
+            height:200px;
+            padding: 5px;
+        }
