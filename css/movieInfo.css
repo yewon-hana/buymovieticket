@@ -24,7 +24,9 @@
         }
 
         .buy{
-            width: 70px;
+            padding-top: 10px;
+            width: 80px;
+            cursor: pointer;
         }
 
         #mvbuy{
