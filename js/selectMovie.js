@@ -1,4 +1,4 @@
-    let loginStatus = localStorage.getItem('loginMember');
+    let loginStatus = JSON.parse(localStorage.getItem('loginMember'));
     let curMovies = JSON.parse(localStorage.getItem('curMovies')); 
 
     let ticket = document.getElementById("ticket");
@@ -88,22 +88,16 @@
         if(loginStatus==""){
             let logincheck = confirm("로그인이 필요한 서비스입니다! 로그인해 주세요");
             if(logincheck){
-                //window.open('login.html','_blank','width=320px,height=320px,scrollbars=no,top=200,left=800');
                 window.location.href = "login.html";
             }
         }else{
-            
-        let userDB = JSON.parse(localStorage.getItem('users')); 
-        
-        let loginedUser = userDB.map((i)=>{
-            if(i['id']==loginStatus){
-                if(i['tickets']!=""){
-                    window.location.href = "showMovieTicket.html";
-                }else{
-                    alert("구매한 티켓 정보가 없습니다");
-                }
-            }
-        })
+        let ticketCheck = loginStatus['tickets'];
+
+        if(ticketCheck!=""){
+             window.location.href = "showMovieTicket.html";
+        }else{
+            alert("구매한 티켓 정보가 없습니다");
+        }
 
         }
     })

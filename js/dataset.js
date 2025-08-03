@@ -1,3 +1,6 @@
+let check = localStorage.getItem('check');
+if(check==null){
+
 localStorage.setItem('selectedMovie',"");
 localStorage.setItem('selectedMem',"");
 localStorage.setItem('selectedSeat',"");
@@ -67,3 +70,6 @@ let currentMovies = [
 localStorage.setItem("users",JSON.stringify(users));
 localStorage.setItem("curMovies",JSON.stringify(currentMovies));
 localStorage.setItem('loginMember',"");
+
+localStorage.setItem('check',1);
+}
