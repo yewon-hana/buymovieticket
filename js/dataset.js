@@ -1,14 +1,13 @@
 localStorage.setItem('selectedMovie',"");
 localStorage.setItem('selectedMem',"");
 localStorage.setItem('selectedSeat',"");
-//localStorage.setItem('status',false);
 
 let users = [
-  { id:"yewon", pw:"gksdPdnjs", name:"한예원", coupon:[], tickets:[] },
   { id:"gahyeon", pw:"rlarkgus", name:"김가현", coupon:[], tickets:[] },
+  { id:"jinwoo", pw:"tjdwlsdn", name:"성진우", coupon:[], tickets:[] },
   { id:"yeonseo", pw:"thsdustj", name:"손연서", coupon:[], tickets:[] },
   { id:"taeho", pw:"gkxogh", name:"하태호", coupon:[], tickets:[] },
-  { id:"jinwoo", pw:"tjdwlsdn", name:"성진우", coupon:[], tickets:[] }
+  { id:"yewon", pw:"gksdPdnjs", name:"한예원", coupon:[], tickets:[] }
 ];
 
 //영화 관련 정보

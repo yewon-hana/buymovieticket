@@ -7,14 +7,14 @@ loginForm.addEventListener("submit", function(e){
   let match = false;
   for(let i=0;i<users.length;i++){
     if(users[i].id === inputId.value && users[i].pw === inputPw.value){
-      status = true;
       loginMember = users[i];
       match = true;
       break;
     }
   }
   if(match){
-    if (selectedMovie !== null) {
+    localStorage.setItem("loginMember", JSON.stringify(loginMember));
+    if (selectedMovie !== null && selectedMovie !== ""){
       window.location.href = "payment.html";
     }
     else{
