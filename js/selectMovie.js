@@ -1,4 +1,4 @@
-    let loginStatus = JSON.parse(localStorage.getItem('loginMember'));
+    let loginStatus = localStorage.getItem('loginMember');
     let curMovies = JSON.parse(localStorage.getItem('curMovies')); 
 
     let ticket = document.getElementById("ticket");
@@ -91,7 +91,7 @@
                 window.location.href = "login.html";
             }
         }else{
-        let ticketCheck = loginStatus['tickets'];
+        let ticketCheck = JSON.parse(loginStatus)['tickets'];
 
         if(ticketCheck!=""){
              window.location.href = "showMovieTicket.html";
