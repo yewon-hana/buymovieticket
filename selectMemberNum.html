@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        .container{
+            height: 100vh;
+            height: 100dvh;  
+            display: grid;
+            place-items: center;              
+        }
         .mainTd{
             background-color: brown;
             color: white;
@@ -12,10 +18,12 @@
         }
         .numSpan{
             display: inline-block;
-            background-color: white;
-            color: white;
             width: 27.4px;
             text-align: center;
+        }
+        #button{
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
@@ -39,7 +47,7 @@
                 </td>
             </tr>
             <tr id="seniorTr">
-                <td class="mainTd">노인</td>                   
+                <td class="mainTd">경로우대</td>                   
                 <td class="numTd">
                     <button onclick="up(this)">▲</button>
                     <span class="numSpan" id="seniorNum">0</span>
@@ -47,7 +55,9 @@
                 </td>
             </tr>
         </table>
-        <button id="toSeat" onclick="toSeat()">좌석 선택</button>
+        <div id='button'>
+            <button id="toSeat" onclick="toSeat()">좌석 선택</button>
+        </div>
     </div>
     
 
@@ -72,12 +82,19 @@
     <script>
         let MemberInfo = { adult: 0, child: 0, senior: 0 }
         let toSeat = () => {    
-            let spanCollection = document.getElementsByClassName('numSpan');
-            let spanId = [...spanCollection].map((span)=>` ${span.innerText}`);             
-            MemberInfo.adult = spanId[0];
-            MemberInfo.child = spanId[1];
-            MemberInfo.senior = spanId[2];
-            localStorage.setItem("MemberInfo", MemberInfo);
+            let spanHC = document.getElementsByClassName('numSpan');
+            let spanId = [...spanHC].map((span)=>` ${span.innerText}`);     
+            
+            if (spanId[0] == 0 && spanId[2] == 0 && spanId[1]){
+                alert('어린이 관객은 성인 보호자가 최소 1명 필요합니다!');
+            }
+            else{
+                MemberInfo.adult = spanId[0];
+                MemberInfo.child = spanId[1];
+                MemberInfo.senior = spanId[2];
+                localStorage.setItem("MemberInfo", JSON.stringify(MemberInfo));
+                window.location.href = "selectMemberSeat.html";                
+            }
         }
     </script>
 </body>
