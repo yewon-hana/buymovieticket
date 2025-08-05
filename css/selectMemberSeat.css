@@ -1,0 +1,37 @@
+html{
+    font-size: 1rem;
+}
+#container{
+    /*전체 요소 화면 중앙정렬*/
+    height: 100vh;
+    height: 100dvh;  
+    display: grid;
+    place-items: center;              
+}
+#seats {
+    border-collapse: separate;
+    font-size: 1rem;        
+}
+#seats td{
+    border: 0.2rem solid rgb(255, 255, 255);
+    text-align: center;
+    padding: 0.5rem;
+    background-color: rgb(107, 0, 128);
+    color: white;
+}   
+#infoTr .ageTd{
+    font-weight: bold;
+}
+#screen{
+    width: 20.5rem;
+    background-color: lightgray;
+    text-align: center;
+}
+#selectedSeats{
+    height: 2rem;
+    width: 20.5rem;
+    border: 0.1rem solid black;
+}        
+#seats .selectedSeatTd{
+    background-color: aqua;
+}
