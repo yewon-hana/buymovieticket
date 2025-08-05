@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>showMovieTicket</title>
+    <style>
+        .showTicket{
+            display: block;
+            text-align: center;
+        }
+
+        .ticketInfo {
+            display: flex;
+            justify-self: center;
+            padding: 10px;
+            border: 3px solid darkgray;
+            border-radius: 20px;
+        }
+
+        #ticketPoster{
+            width : 400px;
+            height: fit-content;
+            padding: 18px;
+        }
+
+        #ticketDetails{
+            width :420px;
+            font-size: 14px;
+            text-align: left;
+        }
+
+        #forw{
+            cursor: pointer;
+            width: 30px;
+            display: flex;
+            justify-self: right;
+            padding-right: 200px;
+        }
+    </style>
+</head>
+<body>
+    <img src="/icons/forward.png" id = "forw">
+    <div class = "showTicket">
+        <div class = "ticketInfo">
+        <img id ="ticketPoster" src ="">
+        <div id = "ticketDetails">
+        </div>
+        </div>
+    </div>
+
+    <script>
+        let forw = document.getElementById("forw");
+        
+
+        forw.addEventListener('click',function(){
+            window.location.href="selectMovie.html";
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+body {
+  font-family: arial;
+  display: inline-block;
+  background-color: beige;
+}
+
+.container {
+  background-color: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+input {
+  width: 200px;
+  padding: 10px;
+  margin: 5px;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+  background-color: blue;
+  color: white;
+  margin-top: 10px;
+  border: none;
+}
+
+#loginMessage {
+  margin-top: 10px;
+  color: red;
+}

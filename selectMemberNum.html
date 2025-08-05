@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .container{
+            height: 100vh;
+            height: 100dvh;  
+            display: grid;
+            place-items: center;              
+        }
+        .mainTd{
+            background-color: brown;
+            color: white;
+            width: 60px;
+            text-align: center;
+        }
+        .numSpan{
+            display: inline-block;
+            width: 27.4px;
+            text-align: center;
+        }
+        #button{
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <table>
+            <tr id="adultTr">
+                <td class="mainTd">성인</td>
+                <td class="numTd">
+                    <button onclick="up(this)">▲</button>
+                    <span class="numSpan" id="adultNum">0</span>
+                    <button onclick="down(this)">▼</button>
+                </td>
+            </tr>
+            <tr id="childTr">
+                <td class="mainTd">어린이</td>                    
+                <td class="numTd">
+                    <button onclick="up(this)">▲</button>
+                    <span class="numSpan" id="childNum">0</span>
+                    <button onclick="down(this)">▼</button>
+                </td>
+            </tr>
+            <tr id="seniorTr">
+                <td class="mainTd">경로우대</td>                   
+                <td class="numTd">
+                    <button onclick="up(this)">▲</button>
+                    <span class="numSpan" id="seniorNum">0</span>
+                    <button onclick="down(this)">▼</button> 
+                </td>
+            </tr>
+        </table>
+        <div id='button'>
+            <button id="toSeat" onclick="toSeat()">좌석 선택</button>
+        </div>
+    </div>
+    
+
+    <script>
+        function up(b){
+            let num = b.nextElementSibling;
+            num.innerText=parseInt(num.innerText)+1;
+        }
+
+        function down(b){
+            let num = b.previousElementSibling;
+            // 숫자가 0일 경우 -1 하지 않도록
+            if (num.innerText == 0){
+                return;
+            }
+            else{
+                num.innerText=parseInt(num.innerText)-1;
+            }
+        }
+        
+    </script>
+    <script>
+        let MemberInfo = { adult: 0, child: 0, senior: 0 }
+        let toSeat = () => {    
+            let spanHC = document.getElementsByClassName('numSpan');
+            let spanId = [...spanHC].map((span)=>` ${span.innerText}`);     
+            
+            if (spanId[0] == 0 && spanId[2] == 0 && spanId[1]){
+                alert('어린이 관객은 성인 보호자가 최소 1명 필요합니다!');
+            }
+            else{
+                MemberInfo.adult = spanId[0];
+                MemberInfo.child = spanId[1];
+                MemberInfo.senior = spanId[2];
+                localStorage.setItem("MemberInfo", JSON.stringify(MemberInfo));
+                window.location.href = "selectMemberSeat.html";                
+            }
+        }
+    </script>
+</body>
+</html>
