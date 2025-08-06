@@ -2,16 +2,31 @@
             margin: 0 auto;
         }
 
-        .user_interface {
-            width: 100%;
+        #user_interface {
+            /* width: 100%; */
+            text-align: right;
+            margin-right: 100px;
         }
 
-        .bar {
+        .barImg {
             cursor: pointer;
             width: 30px;
-            display: flex;
-            justify-self: right;
-            padding-right: 200px;
+            display: inline-block;
+            padding: 5px;
+        }
+        #ticket{
+            padding-bottom: 2px;
+            padding-right: 3px;
+            padding-bottom: 10px;
+        }
+
+        #user{
+            display: none;
+            padding-bottom: 10px;
+        }
+
+        #login{
+            width:45px;
         }
 
         .movies {
@@ -80,8 +95,10 @@
 
         #shortInfo {
             font-size: small;
+            font-weight: bold;
+
         }
         #ageImg{
             width: 30px;
-            margin-top: 5px;
+            padding-top: 5px;
         }

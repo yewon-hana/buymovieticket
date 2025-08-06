@@ -2,11 +2,6 @@ localStorage.setItem('selectedMovie',"");
 localStorage.setItem('selectedMem',"");
 localStorage.setItem('selectedSeat',"");
 
-// let selectedMovie = "";
-let selectedMem = "";
-let selectedSeat = "";
-let loginMember = "";
-
 let users = [
   { id:"gahyeon", pw:"rlarkgus", name:"김가현", coupon:[], tickets:[] },
   { id:"jinwoo", pw:"tjdwlsdn", name:"성진우", coupon:[], tickets:[] },
