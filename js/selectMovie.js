@@ -2,6 +2,8 @@
     let curMovies = JSON.parse(localStorage.getItem('curMovies')); 
 
     let ticket = document.getElementById("ticket");
+    let login = document.getElementById("login");
+    let user = document.getElementById("user");
     let movie1 = document.getElementById("movie1");
     let movie2 = document.getElementById("movie2");
     let movie3 = document.getElementById("movie3");
@@ -21,6 +23,21 @@
     //영화 정보 표시
     ageFor();
    
+    checking();
+
+    //로그인 상태면 로그아웃과 user 페이지 버튼 뜨게
+    function checking(){
+        if(loginStatus!=""){
+            login.src = "/icons/logout.png";
+            login.style.width = '25px';
+            login.style.paddingBottom = "12px";
+            user.style.display='inline-block';
+        }else{
+            login.src = "/icons/login.png";
+            user.style.display='hidden';
+        }
+    }
+
     function ageFor(){
         ageImg.src = curMovies[index]['age'];
         shortInfo.innerText =  curMovies[index]['shortInfo'];
@@ -99,5 +116,22 @@
             alert("구매한 티켓 정보가 없습니다");
         }
 
+    }
+})
+
+//login과 logout 기능  
+login.addEventListener('click',()=>{
+    if(loginStatus==""){
+        window.location.href = "login.html";
+    }else{
+        let check = confirm('진짜 로그아웃 하시겠습니까?');
+        if(check){
+            localStorage.setItem('loginMember','');
+            window.location.href = "selectMovie.html";
         }
-    })
+    }
+})
+
+user.addEventListener('click',()=>{
+    window.location.href = "userPage.html";
+})
