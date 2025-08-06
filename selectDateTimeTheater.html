@@ -3,126 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/selectDateTimeTheater.css">
     <title>영화예매 페이지_상영일자/상영관 선택</title>
-    <style>
-        .date-btns {
-            padding: 10px;
-            margin: 5px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-            background-color: #f0f0f0;
-            font-size: 18px;
-            font-weight: 1000;
-        }
-        .schedule-btns {
-            padding: 40px;
-            margin: 30px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
-            background-color: #f0f0f0;
-            font-size: 20px;
-            font-weight: 800;
-        }
-    </style>
 </head>
 <body>
-    <h2 style="padding-left: 20px;" >영화예매 
-        <span style="font-size: 15px; font-weight: 450; border-left: 0.5px solid #aaa; padding-left: 4px;">상영일자/상영관 선택</span>
-    </h2>
-    <hr>
-    <!--예매 일자 선택, 상영시간과 상영관 나타나게 하기-->
-    <h4 style="padding-left: 30px; font-weight: 400; padding-bottom: 10px;">예매일자 선택
-        <div id="dateButtons" style="padding-top: 15px;"></div>
-    </h4>
-    <h4 style="padding-left: 30px; font-weight: 400;">해당 일자 상영 정보</h4>
-        <div id="scheduleContainer" style="padding-left: 30px;"></div>
+    <div>
+        <span class="title">영화예매</span>
+        <span class="smallTitle">상영일자/상영관 선택</span>
+        <hr>
+    </div>
+    
+        <h4 class="titleSelectDate">예매일자 선택
+            <div id="dateButtons"></div>
+        </h4>
+        <div>
+            <div id="titleContainer"></div>
+            <div id="scheduleContainer"></div>
+        </div>
+    
 
-    <script>
-        //상영시간과 상영관 정보
-        const scheduleData={
-            "2025-08-01":[
-                {time:"10:00", theater:"1관"},
-                {time:"13:20", theater:"4관"},
-                {time:"19:30", theater:"2관"}
-            ],
-
-            "2025-08-02":[
-                {time:"10:00", theater:"1관"},
-                {time:"13:20", theater:"4관"},
-                {time:"19:30", theater:"2관"}
-            ],
-
-            "2025-08-04":[
-                {time:"10:00", theater:"1관"},
-                {time:"13:20", theater:"4관"},
-                {time:"19:30", theater:"2관"}
-            ],
-
-            "2025-08-05":[
-                {time:"10:00", theater:"1관"},
-                {time:"13:20", theater:"4관"},
-                {time:"19:30", theater:"2관"}
-            ],
-        };
-
-        //예매 일자 선택 -> 상영 일자/상영관 정보
-        const dateButtons = document.getElementById("dateButtons");
-        const scheduleContainer = document.getElementById("scheduleContainer");
-        const today = new Date();
-
-        //예매 일자 자동 생성
-        for(let i=0; i<7; i++){
-            const date=new Date();
-            date.setDate(today.getDate()+i);
-
-            const year=date.getFullYear();
-            let month=date.getMonth()+1;
-            if(month<10)
-            month="0"+month;
-            let day=date.getDate();
-            if(day<10)
-            day="0"+day;
-            const dateOnScreen=`${year}-${month}-${day}`;
-            
-        //예매 일자 버튼 생성
-            const btn=document.createElement("button");
-            btn.textContent=`${month} / ${day}`;
-            btn.className="date-btns";
-            btn.dataset.date=dateOnScreen;
-            btn.addEventListener("click",function(){
-                const allButtons = document.querySelectorAll(".date-btns");
-                allButtons.forEach(b => {
-                    b.style.backgroundColor = "#f0f0f0";
-                });
-                this.style.backgroundColor="#fff0f5";
-                this.style.color="black";
-                showSchedule(dateOnScreen);
-            });
-
-            dateButtons.appendChild(btn);
-        }
-
-        //예매 일자 버튼 클릭 시 상영일자와 상영관 정보 출력
-        function showSchedule(dateOnScreen){
-            const schedules=scheduleData[dateOnScreen];
-            scheduleContainer.innerText="";
-
-            if(schedules&&schedules.length>0){
-                schedules.forEach(item=>{
-                    const btn=document.createElement("button");
-                    btn.innerHTML=`${item.time}`+"<br>"+`${item.theater}`;
-                    btn.className="schedule-btns";
-                    btn.addEventListener("click",function(){
-                        alert("좌석 선택 페이지로 이동");
-                        window.location.href = "selectMemberNum.html";
-                        
-                    });
-                    scheduleContainer.appendChild(btn);
-                });
-            } else {
-                scheduleContainer.textContent="선택하신 일자에 상영 일정이 없습니다. 다른 일자를 선택해주세요.";
-            }
-        }
-    </script>
+    <script src="/js/selectDateTimeTheater.js"></script>
 </body>
 </html
