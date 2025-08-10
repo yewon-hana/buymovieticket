@@ -83,6 +83,7 @@ for(let i=0; i<7; i++){
 
             btn.addEventListener("click",function(){
                 let check = confirm(`선택하신 시간은 ${item.time}, 해당 상영관은 ${item.theater} 입니다.`);
+                
                 if(check) {
                     localStorage.setItem("selectedTime",item.time);
                     localStorage.setItem("selectedTheater",item.theater);

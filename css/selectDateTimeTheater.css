@@ -9,10 +9,12 @@ body {
     border-radius: 10px;
     padding: 20px;
     max-width: 800px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
     margin: 0 auto;
 }
 
@@ -30,29 +32,32 @@ body {
 }
 
 .titleSelectDate {
+    margin-top: 30px;
     padding-left: 30px; 
-    font-weight: 100;
+    font-weight: 400;
     padding-bottom: 10px;
     text-align: center;
 }
 
 .titleSelectTimeTheater {
+    margin-top: 30px;
     padding-left: 30px; 
-    font-weight: 100;
+    font-weight: 400;
     padding-bottom: 10px;
     text-align: center; 
 }
 
 .date-btns {
             padding: 10px;
-            margin: 5px;
             margin-top: 20px;
+            margin: 5px;
             border: 1px solid #aaa;
             border-radius: 5px;
             background-color: #f0f0f0;
             font-size: 18px;
             font-weight: 1000;
-        }
+}
+
 .schedule-btns {
             padding: 40px;
             margin-left: 10px;
@@ -63,4 +68,4 @@ body {
             font-size: 20px;
             font-weight: 800;
             text-align: center;
-        }
+}
