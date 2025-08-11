@@ -17,8 +17,9 @@ loginForm.addEventListener("submit", function(e){
     }
   }
   if(match){
+    console.log(selectedMovie);
     localStorage.setItem("loginMember", JSON.stringify(loginMember));
-    if (selectedMovie !== null){
+    if (selectedMovie !== ''){
       window.location.href = "payment.html";
     }
     else{

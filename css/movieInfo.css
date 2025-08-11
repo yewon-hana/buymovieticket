@@ -37,7 +37,7 @@
 
         #mvImages{
             width: 350px;
-            height: 250px;
+            height: 260px;
             /* background-color: aqua; */
             overflow: scroll;
             white-space: nowrap;
