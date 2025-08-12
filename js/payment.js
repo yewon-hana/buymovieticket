@@ -5,7 +5,7 @@ const selectedSeat = localStorage.getItem("selectedSeat");
 const selectedDate = localStorage.getItem("selectedDate");
 const selectedTheater = localStorage.getItem("selectedTheater");
 const selectedTime = localStorage.getItem("selectedTime");
-const appliedCoupons = [];
+let appliedCoupons = [];
 
 const selectedImg = document.getElementById("selectedImg");
 const selMovInfo = document.getElementById("selMovInfo");
