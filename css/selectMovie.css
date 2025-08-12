@@ -17,16 +17,16 @@ div {
 #ticket {
   padding-bottom: 2px;
   padding-right: 3px;
-  padding-bottom: 10px;
+  padding-bottom: 8px;
 }
-
+/* 
 #user {
   display: none;
   padding-bottom: 10px;
-}
+} */
 
 #login {
-  width: 45px;
+  width: 30px;
 }
 
 .movies {

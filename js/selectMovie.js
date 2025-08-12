@@ -3,7 +3,6 @@ let curMovies = JSON.parse(localStorage.getItem("curMovies"));
 
 let ticket = document.getElementById("ticket");
 let login = document.getElementById("login");
-// let user = document.getElementById("user");
 let movie1 = document.getElementById("movie1");
 let movie2 = document.getElementById("movie2");
 let movie3 = document.getElementById("movie3");
@@ -31,10 +30,8 @@ function checking() {
     login.src = "/icons/logout.png";
     login.style.width = "25px";
     login.style.paddingBottom = "12px";
-    // user.style.display='inline-block';
   } else {
-    login.src = "/icons/login.png";
-    // user.style.display='hidden';
+    login.src = "/icons/user_interface.png";
   }
 }
 
@@ -130,7 +127,3 @@ login.addEventListener("click", () => {
     }
   }
 });
-
-// user.addEventListener('click',()=>{
-//     window.location.href = "userPage.html";
-// })
