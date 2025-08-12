@@ -1,45 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SelectMember</title>
-    <link rel="stylesheet" href="/css/selectMemberNum.css">
-</head>
-<body>
-
+    <link rel="stylesheet" href="/css/selectMemberNum.css" />
+  </head>
+  <body>
     <div class="container">
-        <table>
-            <tr id="adultTr">
-                <td class="mainTd">성인</td>
-                <td class="numTd">
-                    <button onclick="up(this)">▲</button>
-                    <span class="numSpan" id="adultNum">0</span>
-                    <button onclick="down(this)">▼</button>
-                </td>
-            </tr>
-            <tr id="childTr">
-                <td class="mainTd">어린이</td>                    
-                <td class="numTd">
-                    <button onclick="up(this)">▲</button>
-                    <span class="numSpan" id="childNum">0</span>
-                    <button onclick="down(this)">▼</button>
-                </td>
-            </tr>
-            <tr id="seniorTr">
-                <td class="mainTd">경로우대</td>                   
-                <td class="numTd">
-                    <button onclick="up(this)">▲</button>
-                    <span class="numSpan" id="seniorNum">0</span>
-                    <button onclick="down(this)">▼</button> 
-                </td>
-            </tr>
-        </table>
-        <div id='button'>
-            <button id="toSeat" onclick="toSeat()">좌석 선택</button>
-        </div>
+      <table>
+        <tr id="adultTr">
+          <td class="mainTd">성인</td>
+          <td class="numTd">
+            <button onclick="up(this)">▲</button>
+            <span class="numSpan" id="adultNum">0</span>
+            <button onclick="down(this)">▼</button>
+          </td>
+        </tr>
+        <tr id="childTr">
+          <td class="mainTd">어린이</td>
+          <td class="numTd">
+            <button onclick="up(this)">▲</button>
+            <span class="numSpan" id="childNum">0</span>
+            <button onclick="down(this)">▼</button>
+          </td>
+        </tr>
+        <tr id="seniorTr">
+          <td class="mainTd">경로우대</td>
+          <td class="numTd">
+            <button onclick="up(this)">▲</button>
+            <span class="numSpan" id="seniorNum">0</span>
+            <button onclick="down(this)">▼</button>
+          </td>
+        </tr>
+      </table>
+      <div id="button">
+        <button id="toSeat" onclick="toSeat()">좌석 선택</button>
+      </div>
     </div>
-    
+
     <script src="/js/selectMemberNum.js"></script>
-</body>
+  </body>
 </html>

@@ -1,104 +1,103 @@
-        div {
-            margin: 0 auto;
-        }
+div {
+  margin: 0 auto;
+}
 
-        #user_interface {
-            /* width: 100%; */
-            text-align: right;
-            margin-right: 100px;
-        }
+#user_interface {
+  /* width: 100%; */
+  text-align: right;
+  margin-right: 100px;
+}
 
-        .barImg {
-            cursor: pointer;
-            width: 30px;
-            display: inline-block;
-            padding: 5px;
-        }
-        #ticket{
-            padding-bottom: 2px;
-            padding-right: 3px;
-            padding-bottom: 10px;
-        }
+.barImg {
+  cursor: pointer;
+  width: 30px;
+  display: inline-block;
+  padding: 5px;
+}
+#ticket {
+  padding-bottom: 2px;
+  padding-right: 3px;
+  padding-bottom: 10px;
+}
 
-        #user{
-            display: none;
-            padding-bottom: 10px;
-        }
+#user {
+  display: none;
+  padding-bottom: 10px;
+}
 
-        #login{
-            width:45px;
-        }
+#login {
+  width: 45px;
+}
 
-        .movies {
-            margin-top: 100px;
-            width: 100%;
-            display: flex;
-            justify-self: center;
-            overflow: hidden;
-        }
+.movies {
+  margin-top: 100px;
+  width: 100%;
+  display: flex;
+  justify-self: center;
+  overflow: hidden;
+}
 
-        .movie {
-            width: 250px;
-            padding: 10px;
-        }
+.movie {
+  width: 250px;
+  padding: 10px;
+}
 
-        #movie1,
-        #movie3 {
-            margin-top: 60px;
-            width: 250px;
-            cursor: pointer;
-            border-radius: 20px;
-        }
+#movie1,
+#movie3 {
+  margin-top: 60px;
+  width: 250px;
+  cursor: pointer;
+  border-radius: 20px;
+}
 
-        #movie1 {
-            visibility: hidden;
-        }
+#movie1 {
+  visibility: hidden;
+}
 
-        #movie2 {
-            width: 300px;
-            cursor: pointer;
-            border-radius: 20px;            
-        }
+#movie2 {
+  width: 300px;
+  cursor: pointer;
+  border-radius: 20px;
+}
 
-        .btnImg {
-            width: 40px;
-            height: 40px;
-        }
+.btnImg {
+  width: 40px;
+  height: 40px;
+}
 
-        button {
-            margin-left: 51px;
-            margin-top: 200px;
-            background-color: unset;
-            height: 60px;
-            cursor: pointer;
-            border-radius: 20px;
-        }
+button {
+  margin-left: 51px;
+  margin-top: 200px;
+  background-color: unset;
+  height: 60px;
+  cursor: pointer;
+  border-radius: 20px;
+}
 
-        #movieDetails {
-            text-align: center;
-        }
+#movieDetails {
+  text-align: center;
+}
 
-        #buy {
-            margin-left: 48px;
-            width: 80px;
-            cursor: pointer;
-        }
+#buy {
+  margin-left: 48px;
+  width: 80px;
+  cursor: pointer;
+}
 
-        #info {
-            width: 300px;
-            height: 50px;
-        }
+#info {
+  width: 300px;
+  height: 50px;
+}
 
-        #prev {
-            visibility: hidden;
-        }
+#prev {
+  visibility: hidden;
+}
 
-        #shortInfo {
-            font-size: small;
-            font-weight: bold;
-
-        }
-        #ageImg{
-            width: 30px;
-            padding-top: 5px;
-        }
+#shortInfo {
+  font-size: small;
+  font-weight: bold;
+}
+#ageImg {
+  width: 30px;
+  padding-top: 5px;
+}

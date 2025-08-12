@@ -1,301 +1,278 @@
- // 로컬 스토리지에서 받아올 데이터 설정 부분 : 테스트를 위해서 임시로 데이터 설정한 상태
-        // localStorage.setItem('selectedMovie', JSON.stringify({ title: "영화 제목", time: "19:00", info: "자막" }));
-        // localStorage.setItem('selectedMem', JSON.stringify({ adult: 2, child: 1, senior: 0 })); 
-        // localStorage.setItem('selectedSeat', JSON.stringify(["A1", "A2", "A3"]));
-        // localStorage.setItem('loggedInUserId', 'project'); // 'project' 사용자로 변경하여 쿠폰이 보이도록 함
+const storedMovie = JSON.parse(localStorage.getItem("selectedMovie"));
+const storedMem = JSON.parse(localStorage.getItem("selectedMem"));
+const loggedInUser = JSON.parse(localStorage.getItem("loginMember"));
+const selectedSeat = localStorage.getItem("selectedSeat");
+const selectedDate = localStorage.getItem("selectedDate");
+const selectedTheater = localStorage.getItem("selectedTheater");
+const selectedTime = localStorage.getItem("selectedTime");
+const appliedCoupons = [];
 
-        // 전역 변수
-        let selectedMovieImg = "";     
-        let selectedMovieTime = "";
-        let selectedMovieInfo = "";
-        let clientInfo = {}; 
-        let loginStatus = false; 
-        let currentUser = null; 
-        let appliedCoupons = []; 
-        let movieSelected = false; 
-        let selectedSeatInfo = [];
-        let clientName = ""; 
-        let paymentMethod = ""; 
+const selectedImg = document.getElementById("selectedImg");
+const selMovInfo = document.getElementById("selMovInfo");
 
-        // 총합 가격 / 쿠폰 적용 후 가격
-        let totalPrice = 0;
-        let finalPrice = 0;
-        
-        // 사용자 데이터(예시)
-        let users = [
-            { id:"project", pw:"jspro", name:"프로젝트", coupon:[
-                {id:"coupon-1", type:"percentage", value:0.2, count:1, name:"20% 할인 쿠폰"},
-                {id:"coupon-2", type:"fixed", value:10000, count:1, name:"만원 할인권"},
-                // {id:"coupon-3", type:"fixed", value:8000, count:0, name:"어린이 무료 쿠폰"} 
-            ], tickets:[] },
-            { id:"jinwoo", pw:"tjdwlsdn", name:"성진우", coupon:[], tickets:[] }, // 쿠폰 없음
-            { id:"yeonseo", pw:"thsdustj", name:"손연서", coupon:[{id:"coupon-4", type:"percentage", value:0.1, count:2, name:"10% 할인 쿠폰"}], tickets:[] },
-            { id:"taeho", pw:"gkxogh", name:"하태호", coupon:[], tickets:[] },
-            { id:"yewon", pw:"gksdPdnjs", name:"한예원", coupon:[{id:"coupon-5", type:"fixed", value:8000, count:1, name:"어린이 무료 쿠폰"}], tickets:[] }
-        ];
+selectedImg.src = storedMovie["poster"];
+selMovInfo.innerHTML = `<div>선택 좌석 : ${selectedSeat}</div> 
+<div>상영 일자 :${selectedDate} </div>
+<div>상영관 : ${selectedTheater} </div>
+<div>상영 시간 : ${selectedTime}</div>`;
 
-     
+// 총합 가격 / 쿠폰 적용 후 가격
+let totalPrice = 0;
+let finalPrice = 0;
 
-        const adultPrice = 12000;
-        const childPrice = 8000;
-        const seniorPrice = 6000;
+const adultPrice = 12000;
+const childPrice = 8000;
+const seniorPrice = 6000;
 
-        // 페이지 로드 시 초기화 함수
-        function initPaymentPage() {
-            // 로컬 스토리지에서 데이터 가져오기
-            const storedMovie = JSON.parse(localStorage.getItem('selectedMovie'));
-            const storedMem = JSON.parse(localStorage.getItem('selectedMem'));
-            const loggedInUserId = localStorage.getItem('loggedInUserId');
+// 인원별 가격 테이블 업데이트
+updateDisplay();
+// 가격 계산 및 표시
+calPrice();
+// 쿠폰 표시
+displayCoupons();
+displayAppliedCoupons(); // 적용된 쿠폰 목록도 표시
 
-            if (storedMovie) {
-                selectedMovieImg = storedMovie.img || "";
-                selectedMovieTime = storedMovie.time || "";
-                selectedMovieInfo = storedMovie.info || "";
-                movieSelected = true;
-            }
+// 인원별 가격 테이블 업데이트 함수
+function updateDisplay() {
+  const infoTr = document.getElementById("infoTr");
 
-            if (storedMem) {
-                clientInfo = storedMem;
-            } else {
-                clientInfo = { adult: 0, child: 0, senior: 0 };
-            }
+  const memberCounts = [
+    { label: "성인", count: storedMem.adult || 0, price: adultPrice },
+    { label: "어린이", count: storedMem.child || 0, price: childPrice },
+    { label: "경로우대", count: storedMem.senior || 0, price: seniorPrice },
+  ];
 
-            if (loggedInUserId) {
-                loginStatus = true;
-                // 로그인된 사용자를 찾아서 currentUser에 할당 (쿠폰 정보를 포함해서)
-                currentUser = JSON.parse(JSON.stringify(users.find(user => user.id === loggedInUserId))); 
-                if (!currentUser) {
-                    // 사용자 ID는 있지만 users 배열에 없으면 로그인 상태 해제
-                    loginStatus = false;
-                    console.error("로그인된 사용자 ID를 users 배열에서 찾을 수 없습니다.");
-                }
-            }
-
-            // 인원별 가격 테이블 업데이트
-            updateDisplay();
-            // 가격 계산 및 표시
-            calPrice();
-            // 쿠폰 표시
-            displayCoupons();
-            displayAppliedCoupons(); // 적용된 쿠폰 목록도 표시
-        }
-
-        // 인원별 가격 테이블 업데이트 함수
-        function updateDisplay() {
-            const infoTr = document.getElementById('infoTr');
-            infoTr.innerHTML = ''; // 기존 내용 초기화
-
-            const memberCounts = [
-                { label: '성인', count: clientInfo.adult || 0, price: adultPrice },
-                { label: '어린이', count: clientInfo.child || 0, price: childPrice },
-                { label: '경로우대', count: clientInfo.senior || 0, price: seniorPrice }
-            ];
-
-            memberCounts.forEach(item => {
-                if (item.count > 0) {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
+  memberCounts.forEach((item) => {
+    if (item.count > 0) {
+      const row = document.createElement("tr");
+      row.innerHTML = `
                         <td>${item.label}</td>
                         <td>${item.count}명</td>
                         <td>${item.price.toLocaleString()}원</td>
                         <td>${(item.count * item.price).toLocaleString()}원</td>
                     `;
-                    infoTr.appendChild(row);
-                }
-            });
-        }
+      infoTr.appendChild(row);
+    }
+  });
+}
 
-        // 가격 계산 함수 (여러 쿠폰 동시 적용)
-        function calPrice() {
-            // 1. 총 가격 계산
-            totalPrice = (clientInfo.adult * adultPrice) +
-                         (clientInfo.child * childPrice) +
-                         (clientInfo.senior * seniorPrice);
+// 가격 계산 함수 (여러 쿠폰 동시 적용)
+function calPrice() {
+  // 1. 총 가격 계산
+  totalPrice =
+    storedMem.adult * adultPrice +
+    storedMem.child * childPrice +
+    storedMem.senior * seniorPrice;
 
-            finalPrice = totalPrice; // 최종 가격을 총 가격으로 초기화
+  finalPrice = totalPrice; // 최종 가격을 총 가격으로 초기화
 
-            // 2. 적용된 쿠폰들을 순회하며 할인 적용
-            let fixedCount = 0;
-            let discountRate = 0; 
+  // 2. 적용된 쿠폰들을 순회하며 할인 적용
+  let fixedCount = 0;
+  let discountRate = 0;
 
-            appliedCoupons.forEach(coupon => {
-                if (coupon.type === "fixed") {
-                    fixedCount += coupon.value;
-                } else if (coupon.type === "percentage") {
-                    discountRate += coupon.value;
-                }
-            });
+  appliedCoupons.forEach((coupon) => {
+    if (coupon.type === "fixed") {
+      fixedCount += coupon.value;
+    } else if (coupon.type === "percentage") {
+      discountRate += coupon.value;
+    }
+  });
 
-            // 최종 % 할인율이 100%를 넘지 않도록 제한
-            if (discountRate > 1.0) {
-                discountRate = 1.0;
-            }
+  // 최종 % 할인율이 100%를 넘지 않도록 제한
+  if (discountRate > 1.0) {
+    discountRate = 1.0;
+  }
 
-            // 3. 고정 금액 할인 먼저 적용
-            finalPrice -= fixedCount;
-            if (finalPrice < 0) finalPrice = 0; 
+  // 3. 고정 금액 할인 먼저 적용
+  finalPrice -= fixedCount;
+  if (finalPrice < 0) finalPrice = 0;
 
-            // 4. % 할인 적용
-            finalPrice = finalPrice * (1 - discountRate);
-            if (finalPrice < 0) finalPrice = 0; 
+  // 4. % 할인 적용
+  finalPrice = finalPrice * (1 - discountRate);
+  if (finalPrice < 0) finalPrice = 0;
 
-            // 금액 정보 출력
-            let infoDiv = document.getElementById("info");
-            infoDiv.innerHTML = `
-                <p>총 결제 예정 금액: ${totalPrice.toLocaleString()}원</p>
-            `;
-            if (appliedCoupons.length > 0) {
-                infoDiv.innerHTML += `
-                    <p>적용된 할인 금액: ${(totalPrice - finalPrice).toLocaleString()}원</p>
-                    <p>할인 후 최종 금액: ${finalPrice.toLocaleString()}원</p>
+  // 금액 정보 출력
+  let infoDiv = document.getElementById("info");
+
+  // infoDiv.innerHTML = `
+  //     <p><span class = "infoBold">총 결제 예정 금액:</span> ${totalPrice.toLocaleString()}원</p>
+  // `;
+  if (appliedCoupons.length > 0) {
+    infoDiv.innerHTML = `
+                <div>
+                    <p><span class = "infoBold">할인받은 금액: </span>${(
+                      totalPrice - finalPrice
+                    ).toLocaleString()}원</p>
+                    <p><span class = "total1">최종 결제 금액: ${finalPrice.toLocaleString()}원</span></p>
+                </div>
+                    `;
+  } else {
+    infoDiv.innerHTML = `
+                    <p><span class = "total2">최종 결제 금액: ${finalPrice.toLocaleString()}원 </span></p>
                 `;
-            } else {
-                infoDiv.innerHTML += `
-                    <p>최종 결제 금액: ${finalPrice.toLocaleString()}원</p>
-                `;
-            }
-        }
+  }
+}
 
-        // 사용 가능한 쿠폰 표시 함수
-        function displayCoupons() {
-            const couponDisplayDiv = document.getElementById("coupon-display");
-            couponDisplayDiv.innerHTML = '';
+// 사용 가능한 쿠폰 표시 함수
+function displayCoupons() {
+  const couponDisplayDiv = document.getElementById("coupon-display");
 
-            if (!loginStatus || !currentUser || !currentUser.coupon || currentUser.coupon.length === 0) {
-                couponDisplayDiv.innerHTML = '<p>사용 가능한 쿠폰이 없습니다.</p>';
-                return;
-            }
+  if (!loggedInUser["coupon"] || loggedInUser["coupon"].length === 0) {
+    couponDisplayDiv.innerHTML = "<p>사용 가능한 쿠폰이 없습니다.</p>";
+    return;
+  }
 
-            couponDisplayDiv.innerHTML = '<p>보유 쿠폰:</p>';
-            currentUser.coupon.forEach((coupon) => {
-                const isApplied = appliedCoupons.some(ac => ac.id === coupon.id);
-                const isDisabled = coupon.count === 0 && !isApplied; 
+  couponDisplayDiv.innerHTML = "<p>보유 쿠폰:</p>";
+  loggedInUser["coupon"].forEach((coupon) => {
+    const isApplied = appliedCoupons.some((ac) => ac.id === coupon.id);
+    const isDisabled = coupon.count === 0 && !isApplied;
 
-                const couponItem = document.createElement('div');
-                couponItem.innerHTML = `
+    const couponItem = document.createElement("div");
+    couponItem.innerHTML = `
                     <div>
-                        <p><strong>${coupon.name}</strong> (${coupon.count}개 보유)</p>
+                        <p><strong>${coupon.name}</strong> (${
+      coupon.count
+    }개 보유)</p>
                     </div>
-                    ${isApplied
-                        ? `<button onclick="cancelCoupon('${coupon.id}')">적용 취소</button>`
-                        : `<button onclick="applyCoupon('${coupon.id}')" ${isDisabled ? 'disabled' : ''}>적용</button>`
+                    ${
+                      isApplied
+                        ? `<button class = "couponbtn" onclick="cancelCoupon('${coupon.id}')">적용 취소</button>`
+                        : `<button class = "couponbtn"onclick="applyCoupon('${
+                            coupon.id
+                          }')" ${isDisabled ? "disabled" : ""}>적용</button>`
                     }
                 `;
-                couponDisplayDiv.appendChild(couponItem);
-            });
-        }
+    couponDisplayDiv.appendChild(couponItem);
+  });
+}
 
-        // 적용된 쿠폰 목록 표시 함수
-        function displayAppliedCoupons() {
-            const appliedCoupon = document.getElementById("applied-coupons-list");
-            appliedCoupon.innerHTML = '';
+// 적용된 쿠폰 목록 표시 함수
+function displayAppliedCoupons() {
+  const appliedCoupon = document.getElementById("applied-coupons-list");
 
-            if (appliedCoupons.length === 0) {
-                appliedCoupon.innerHTML = '<p>적용된 쿠폰이 없습니다.</p>';
-                return;
-            }
+  if (appliedCoupons.length === 0) {
+    appliedCoupon.innerHTML = "<p>적용된 쿠폰이 없습니다.</p>";
+    return;
+  }
 
-            appliedCoupon.innerHTML = '<h4>적용된 쿠폰:</h4>';
-            appliedCoupons.forEach(coupon => {
-                const appliedItem = document.createElement('div');
-                appliedItem.innerHTML = `
+  appliedCoupon.innerHTML = "<h4>적용된 쿠폰:</h4>";
+  appliedCoupons.forEach((coupon) => {
+    const appliedItem = document.createElement("div");
+    appliedItem.className = "appliedCoupon";
+    appliedItem.innerHTML = `
                     <span>${coupon.name}</span>
-                    <button onclick="cancelCoupon('${coupon.id}')">취소</button>
+                    <button class = "couponbtn" onclick="cancelCoupon('${coupon.id}')">취소</button>
                 `;
-                appliedCoupon.appendChild(appliedItem);
-            });
-        }
+    appliedCoupon.appendChild(appliedItem);
+  });
+}
 
-        // 쿠폰 적용 함수
-        function applyCoupon(couponId) {
-            const couponApply = currentUser.coupon.find(coupon => coupon.id === couponId);
+// 쿠폰 적용 함수
+function applyCoupon(couponId) {
+  const couponApply = loggedInUser.coupon.find(
+    (coupon) => coupon.id === couponId
+  );
 
-            if (couponApply && couponApply.count > 0) {
-                const onApplied = appliedCoupons.some(ac => ac.id === couponId);
-                if (onApplied) {
-                    alert('이미 적용된 쿠폰입니다.');
-                    return;
-                }
+  if (couponApply && couponApply.count > 0) {
+    couponApply.count--;
+    appliedCoupons.push(couponApply);
 
-                couponApply.count--;
-                appliedCoupons.push(couponApply);
+    calPrice();
+    displayCoupons();
+    displayAppliedCoupons();
+  } else if (couponApply && couponApply.count === 0) {
+    alert("해당 쿠폰은 모두 사용되었습니다.");
+  }
+}
 
-                calPrice(); 
-                displayCoupons(); 
-                displayAppliedCoupons(); 
+// 쿠폰 적용 취소 함수
+function cancelCoupon(couponId) {
+  const indexRemove = appliedCoupons.findIndex((ac) => ac.id === couponId);
 
-            } else if (couponApply && couponApply.count === 0) {
-                alert('해당 쿠폰은 모두 사용되었습니다.');
-            }
-        }
+  if (indexRemove !== -1) {
+    const canceledCoupon = appliedCoupons.splice(indexRemove, 1)[0];
 
-        // 쿠폰 적용 취소 함수
-        function cancelCoupon(couponId) {
-            const indexRemove = appliedCoupons.findIndex(ac => ac.id === couponId);
+    const originalCoupon = loggedInUser.coupon.find(
+      (coupon) => coupon.id === canceledCoupon.id
+    );
+    if (originalCoupon) {
+      originalCoupon.count++;
+    }
 
-            if (indexRemove !== -1) {
-                const canceledCoupon = appliedCoupons.splice(indexRemove, 1)[0]; 
+    calPrice();
+    displayCoupons();
+    displayAppliedCoupons();
+  }
+}
 
-                const originalCoupon = currentUser.coupon.find(coupon => coupon.id === canceledCoupon.id);
-                if (originalCoupon) {
-                    originalCoupon.count++;
-                }
+// 결제 처리
+function Payment() {
+  let paymentMethod = "";
+  let radios = document.getElementsByName("pay");
+  for (let i = 0; i < radios.length; i++) {
+    if (radios[i].checked) {
+      paymentMethod = radios[i].value;
+      break;
+    }
+  }
 
-                calPrice(); 
-                displayCoupons(); 
-                displayAppliedCoupons(); 
-            }
-        }
+  if (!paymentMethod) {
+    alert("결제 방법을 선택하세요.");
+    return;
+  }
+  alert("결제가 완료되었습니다!");
 
-        // 결제 처리
-        function Payment() {
-            let radios = document.getElementsByName("pay");
-            for (let i = 0; i < radios.length; i++) {
-                if (radios[i].checked) {
-                    paymentMethod = radios[i].value;
-                    break; 
-                }
-            }
+  let ticket = {
+    mvId: storedMovie["id"],
+    mvMem: storedMem,
+    mvSeat: selectedSeat,
+    mvTime: { time: selectedTime, theater: selectedTheater },
+    mvDate: selectedDate,
+  };
+  //ticket update
+  const users = JSON.parse(localStorage.getItem("users"));
+  console.log(users);
+  users.map((u) => {
+    if (u.id == loggedInUser.id) {
+      u["tickets"].push(ticket);
+    }
+  });
+  loggedInUser["tickets"].push(ticket);
 
-            if (!paymentMethod) {
-                alert("결제 방법을 선택하세요.");
-                return;
-            }
-            alert("결제가 완료되었습니다!");
-            
-            // {mvId:1,mvMem:{ adult: 1, child: 1, senior: 0 },mvSeat:['D4','D5'],mvTime:{time:'10:00',theater:'4관'},mvDate:'08/06'},
-            window.location.href = "showMovieTicket.html"; 
-        }
+  localStorage.setItem("loginMember", JSON.stringify(loggedInUser));
+  localStorage.setItem("users", JSON.stringify(users));
 
-        // 결제 취소
-        function CancelPayment() {
-            localStorage.removeItem('selectedMovie');
-            localStorage.removeItem('selectedMem');
-            localStorage.removeItem('selectedSeat');
-            localStorage.removeItem('loggedInUserId'); 
+  //선택된 사항들 초기화
+  localStorage.setItem("selectedMovie", "");
+  localStorage.setItem("selectedMem", "");
+  localStorage.setItem("selectedSeat", "");
+  localStorage.setItem("selectedDate", "");
+  localStorage.setItem("selectedTime", "");
+  localStorage.setItem("selectedTheater", "");
 
-            appliedCoupons.forEach(ac => {
-                const originalCoupon = currentUser.coupon.find(coupon => coupon.id === ac.id);
-                if (originalCoupon) {
-                    originalCoupon.count++;
-                }
-            });
-            appliedCoupons = []; 
+  window.location.href = "showMovieTicket.html";
+}
 
-            selectedMovieImg = "";
-            selectedMovieTime = "";
-            selectedMovieInfo = "";
-            clientInfo = { adult: 0, child: 0, senior: 0 };
-            loginStatus = false;
-            currentUser = null;
-            movieSelected = false;
-            selectedSeatInfo = [];
-            clientName = "";
-            paymentMethod = "";
+// 결제 취소
+function CancelPayment() {
+  //선택된 사항들 초기화
+  localStorage.setItem("selectedMovie", "");
+  localStorage.setItem("selectedMem", "");
+  localStorage.setItem("selectedSeat", "");
+  localStorage.setItem("selectedDate", "");
+  localStorage.setItem("selectedTime", "");
+  localStorage.setItem("selectedTheater", "");
 
-            alert("결제가 취소되었습니다.");
-            window.location.href = "selectMovie.html"; 
-        }
+  appliedCoupons.forEach((ac) => {
+    const originalCoupon = loggedInUser.coupon.find(
+      (coupon) => coupon.id === ac.id
+    );
+    if (originalCoupon) {
+      originalCoupon.count++;
+    }
+  });
+  appliedCoupons = [];
 
-        // 페이지 로드 시 초기화 함수 호출
-        window.onload = initPaymentPage;
+  alert("결제가 취소되었습니다.");
+  window.location.href = "selectMovie.html";
+}

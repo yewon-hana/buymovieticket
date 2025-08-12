@@ -1,55 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>SelectSeat</title>
-    <link rel="stylesheet" href="/css/selectMemberSeat.css">
-    <style>
+    <link rel="stylesheet" href="/css/selectMemberSeat.css" />
+  </head>
+  <body>
+    <div id="container">
+      <div id="infoDiv">
+        <table>
+          <tr id="infoTr"></tr>
+        </table>
+      </div>
 
-    </style>
-</head>
-<body>
-    <div id='container'>
+      <div id="theaterDiv">
+        <div id="screen">screen</div>
 
-        <div id="infoDiv">
-            <table>
-                <tr id='infoTr'>
-                </tr>
-            </table>
+        <table id="seats">
+          <!--좌석배치도-->
+        </table>
+      </div>
+
+      <div id="resultDiv">
+        <div id="selectedSeats">
+          <!--선택된 좌석 id 출력-->
         </div>
 
-        <div id="theaterDiv"> 
-            <div id="screen">screen</div> 
-
-            <table id="seats"> 
-            <!--좌석배치도-->            
-            </table>
-        </div>
-
-        <div id="resultDiv">
-            <div id="selectedSeats">
-            <!--선택된 좌석 id 출력-->
-            </div>
-
-            <button id="seatsEnd" onclick='seatsEnd()'>결제하기</button>        
-        </div>
-
+        <button id="seatsEnd" onclick="seatsEnd()">결제하기</button>
+      </div>
     </div>
     <script src="/js/selectMemberSeat1.js"></script>
     <script src="/js/selectMemberSeat2.js"></script>
     <script src="/js/selectMemberSeat3.js"></script>
     <script>
-        const seatsEnd = () => {
-            if (window.localStorage.getItem("loginMember")){
-                window.location.href = "paymentmodi.html";  
-            }
-            else{
-                alert('비로그인 상태입니다. 로그인 페이지로 이동합니다.');
-                window.location.href = "login.html";  
-            }
+      const seatsEnd = () => {
+        if (window.localStorage.getItem("loginMember")) {
+          window.location.href = "payment.html";
+        } else {
+          alert("비로그인 상태입니다. 로그인 페이지로 이동합니다.");
+          window.location.href = "login.html";
         }
-    </script>    
-
-</body>
+      };
+    </script>
+  </body>
 </html>
