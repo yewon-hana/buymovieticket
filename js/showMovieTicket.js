@@ -22,7 +22,7 @@ for (i = 0; i < tickets.length; i++) {
   let total = 0;
   for (let j in mvMem) {
     if (mvMem[j] != 0) {
-      total += mvMem[j];
+      total += parseInt(mvMem[j]);
     }
   }
   let m = document.createElement("span");
