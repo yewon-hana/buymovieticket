@@ -30,7 +30,7 @@ for (let i = 0; i < 7; i++) {
     allButtons.forEach((b) => {
       b.style.backgroundColor = "#f0f0f0";
     });
-    this.style.backgroundColor = "#fff0f5";
+    this.style.backgroundColor = "aliceblue";
     this.style.color = "black";
 
     const titleContainer = document.getElementById("titleContainer");

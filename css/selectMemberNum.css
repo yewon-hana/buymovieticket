@@ -1,33 +1,47 @@
-html {
-  font-size: 1.25rem;
+html{
+    font-size: 1.25rem;
 }
-.container {
-  height: 100vh;
-  height: 100dvh;
-  display: grid;
-  place-items: center start;
+.container{
+    place-items: center start;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding: 30px;
+    margin: 0 auto;
+
+    border: 1px solid black;
+    border-radius: 5px;
+    max-width: 300px;
+
+    box-shadow: 0 0 10px rgba(0, 153, 255, 0.2);
+    background: aliceblue;
 }
-.mainTd {
-  background-color: brown;
-  color: white;
-  width: 4rem;
-  text-align: center;
+.mainTd{
+    border: 1px solid black;
+    border-radius: 5px;
+    background-color: black;
+    color: aliceblue;
+    width: 4rem;
+    text-align: center;
 }
-.numSpan {
-  display: inline-block;
-  width: 27.4px;
-  text-align: center;
+.numSpan{
+    display: inline-block;
+    width: 27.4px;
+    text-align: center;
 }
-#button {
-  display: grid;
-  place-items: start end;
+#button{
+    display: grid;
+    place-items: start end;
 }
-button {
-  width: 1.5rem;
-  height: 1.5rem;
-  font-size: 1rem;
-  text-align: center;
+button{
+    width: 1.5rem;
+    height: 1.5rem;
+    font-size: 1rem;
+    text-align: center;
 }
-#toSeat {
-  width: 6rem;
+#toSeat{
+    width: 6rem;
+    margin-top: 20px
 }

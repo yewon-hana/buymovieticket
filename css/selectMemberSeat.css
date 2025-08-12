@@ -16,14 +16,17 @@ html {
   border: 0.2rem solid rgb(255, 255, 255);
   text-align: center;
   padding: 0.5rem;
-  background-color: rgb(107, 0, 128);
-  color: white;
+  background-color: lightblue;
+}
+#infoDiv {
+  border: 1px solid black;
+  padding: 20px;
 }
 #infoTr .ageTd {
   font-weight: bold;
 }
 #screen {
-  width: 20.5rem;
+  width: 22.4rem;
   background-color: lightgray;
   text-align: center;
 }
@@ -33,5 +36,6 @@ html {
   border: 0.1rem solid black;
 }
 #seats .selectedSeatTd {
-  background-color: aqua;
+  background-color: steelblue;
+  color: white;
 }
