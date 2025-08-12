@@ -88,14 +88,15 @@
 
     //중앙의 영화 클릭하면 상세 페이지로 넘어가기
     movie2.onclick = function(){
-        localStorage.setItem('selectedMovie',curMovies[index]['id']);
+        localStorage.setItem('selectedMovie',JSON.stringify(curMovies[index]));
         window.location.href = "movieInfo.html";
     }
 
     //예매하기 누르면 상영관 선택 화면으로 이동
     buy.addEventListener('click',function(){
         window.location.href = "selectDateTimeTheater.html";
-        localStorage.setItem('selectedMovie',curMovies[index]['id']);
+        localStorage.setItem('selectedMovie',JSON.stringify(curMovies[index]));
+        
     })
 
     //상단의 티켓을 누르면

@@ -71,3 +71,10 @@ body {
             text-align: center;
             cursor: pointer;
 }
+
+#movieImg{
+    width : 250px;
+    margin-top: 20px;
+    display: flex;
+    justify-self: center;
+}

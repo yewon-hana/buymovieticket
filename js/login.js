@@ -20,7 +20,7 @@ loginForm.addEventListener("submit", function(e){
     console.log(selectedMovie);
     localStorage.setItem("loginMember", JSON.stringify(loginMember));
     if (selectedMovie !== ''){
-      window.location.href = "payment.html";
+      window.location.href = "paymentmodi.html";
     }
     else{
       window.location.href = "selectMovie.html";

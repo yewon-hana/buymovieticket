@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>showMovieTicket</title>
+    <title>ShowMovieTicket</title>
     <style>
         .showTicket{
             display: block;
@@ -44,7 +44,7 @@
         }
         
         #mem, #seat, #time{
-            font-size: 20px;
+            font-size: 16px;
             font-weight: bolder;
         }
 
@@ -68,13 +68,10 @@
 
         let mvObj = JSON.parse(localStorage.getItem('curMovies')); 
 
-        // let loginMem = localStorage.getItem('loginMember');
-        let loginMem = { id:"yewon", pw:"gksdPdnjs", name:"한예원", coupon:[], 
-        tickets:[
-            {mvId:1,mvMem:{ adult: 1, child: 1, senior: 0 },mvSeat:['D4','D5'],mvTime:{time:'10:00',theater:'4관'},mvDate:'08/06'},
-        ] };
+        let loginMem = JSON.parse(localStorage.getItem('loginMember'));
         
         let tickets = loginMem['tickets'];
+        console.log(tickets);
         
         let forw = document.getElementById("forw");       
         let mvPoster = document.getElementById("ticketPoster");
@@ -103,7 +100,7 @@
             let mvSeat = mv['mvSeat'];
             for(let j in mvSeat){
             let s = document.createElement('span');
-            s.innerHTML += `${mvSeat[j]}  `;
+            s.innerHTML += `${mvSeat[j]}`;
             seat.appendChild(s);
             }
 

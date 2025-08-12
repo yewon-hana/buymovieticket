@@ -26,13 +26,15 @@
             { id:"project", pw:"jspro", name:"프로젝트", coupon:[
                 {id:"coupon-1", type:"percentage", value:0.2, count:1, name:"20% 할인 쿠폰"},
                 {id:"coupon-2", type:"fixed", value:10000, count:1, name:"만원 할인권"},
-                {id:"coupon-3", type:"fixed", value:8000, count:2, name:"어린이 무료 쿠폰"} 
+                // {id:"coupon-3", type:"fixed", value:8000, count:0, name:"어린이 무료 쿠폰"} 
             ], tickets:[] },
             { id:"jinwoo", pw:"tjdwlsdn", name:"성진우", coupon:[], tickets:[] }, // 쿠폰 없음
             { id:"yeonseo", pw:"thsdustj", name:"손연서", coupon:[{id:"coupon-4", type:"percentage", value:0.1, count:2, name:"10% 할인 쿠폰"}], tickets:[] },
             { id:"taeho", pw:"gkxogh", name:"하태호", coupon:[], tickets:[] },
             { id:"yewon", pw:"gksdPdnjs", name:"한예원", coupon:[{id:"coupon-5", type:"fixed", value:8000, count:1, name:"어린이 무료 쿠폰"}], tickets:[] }
         ];
+
+     
 
         const adultPrice = 12000;
         const childPrice = 8000;
@@ -221,6 +223,7 @@
                 calPrice(); 
                 displayCoupons(); 
                 displayAppliedCoupons(); 
+
             } else if (couponApply && couponApply.count === 0) {
                 alert('해당 쿠폰은 모두 사용되었습니다.');
             }
@@ -259,6 +262,8 @@
                 return;
             }
             alert("결제가 완료되었습니다!");
+            
+            // {mvId:1,mvMem:{ adult: 1, child: 1, senior: 0 },mvSeat:['D4','D5'],mvTime:{time:'10:00',theater:'4관'},mvDate:'08/06'},
             window.location.href = "showMovieTicket.html"; 
         }
 

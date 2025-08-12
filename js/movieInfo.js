@@ -1,6 +1,6 @@
-let mvId = localStorage.getItem("selectedMovie");
-        let mvObj = JSON.parse(localStorage.getItem('curMovies')); 
-        let selected = mvObj[mvId];
+        let selected = JSON.parse(localStorage.getItem("selectedMovie"));
+        // let mvObj = JSON.parse(localStorage.getItem('curMovies')); 
+        // let selected = mvObj[mvId];
 
         let forw = document.getElementById("forw");
         let mvPos = document.getElementById("selectedMoviePoster");
