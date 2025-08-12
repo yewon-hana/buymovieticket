@@ -4,52 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ShowMovieTicket</title>
-    <style>
-      .showTicket {
-        display: block;
-        text-align: center;
-      }
-
-      .ticketInfo {
-        display: flex;
-        justify-self: center;
-        padding: 10px;
-        border: 3px solid darkgray;
-        border-radius: 20px;
-      }
-
-      #ticketPoster {
-        width: 300px;
-        height: fit-content;
-        padding: 18px;
-      }
-
-      #ticketDetails {
-        margin-top: 100px;
-        width: 420px;
-        font-size: 14px;
-        text-align: left;
-        padding-left: 5px;
-      }
-
-      #forw {
-        cursor: pointer;
-        width: 30px;
-        display: flex;
-        justify-self: right;
-        padding-right: 200px;
-      }
-      #title {
-        font-size: 30px;
-      }
-
-      #mem,
-      #seat,
-      #time {
-        font-size: 16px;
-        font-weight: bolder;
-      }
-    </style>
+    <link rel="stylesheet" href="css/showMovieTicket.css" />
   </head>
   <body>
     <img src="/icons/forward.png" id="forw" />
@@ -65,62 +20,7 @@
       </div>
     </div>
 
-    <script>
-      let mvObj = JSON.parse(localStorage.getItem("curMovies"));
-
-      let loginMem = JSON.parse(localStorage.getItem("loginMember"));
-
-      let tickets = loginMem["tickets"];
-      console.log(tickets);
-
-      let forw = document.getElementById("forw");
-      let mvPoster = document.getElementById("ticketPoster");
-      let mvTitle = document.getElementById("title");
-      let mem = document.getElementById("mem");
-      let seat = document.getElementById("seat");
-      let time = document.getElementById("time");
-
-      for (i = 0; i < tickets.length; i++) {
-        let mv = tickets[i];
-
-        mvPoster.src = mvObj[mv["mvId"]].poster;
-        mvTitle.innerText = mvObj[mv["mvId"]].title;
-
-        //티켓 예매한 인원 출력
-        let mvMem = mv["mvMem"];
-
-        for (let j in mvMem) {
-          if (mvMem[j] != 0) {
-            let m = document.createElement("span");
-            m.innerHTML = `${j} ${mvMem[j]}명  `;
-            mem.appendChild(m);
-          }
-        }
-
-        let mvSeat = mv["mvSeat"];
-        for (let j in mvSeat) {
-          let s = document.createElement("span");
-          s.innerHTML += ` ${mvSeat[j]}`;
-          seat.appendChild(s);
-        }
-
-        let mvTime = mv["mvTime"];
-        for (let i in mvTime) {
-          switch (i) {
-            case "theater":
-              time.innerText += `  상영관 : ${mvTime[i]}`;
-              break;
-            case "time":
-              time.innerText += `상영 시간 :  ${mvTime[i]}`;
-              break;
-          }
-        }
-      }
-
-      //뒤로가기 버튼
-      forw.addEventListener("click", function () {
-        window.location.href = "selectMovie.html";
-      });
+    <script src = "./js/showMovieTicket.js">
     </script>
   </body>
 </html>

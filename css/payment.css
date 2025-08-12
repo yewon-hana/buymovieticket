@@ -1,0 +1,90 @@
+#payment-body {
+  text-align: center;
+}
+
+#member-count-table {
+  text-align: center;
+  border-collapse: separate;
+  width: 500px;
+  justify-self: center;
+}
+
+#member-count-table th,
+#member-count-table td {
+  border: 1px solid #46186b;
+  padding: 8px;
+  text-align: left;
+}
+
+#member-count-table th {
+  background-color: #e1c6ff;
+}
+
+#selectedImg {
+  width: 200px;
+}
+
+#selMovInfo {
+  margin: 19px;
+  margin-top: 30px;
+  text-align: left;
+  font-weight: bold;
+}
+.movie {
+  padding: 15px;
+  border: 1px solid #46186b;
+  display: flex;
+  justify-self: center;
+}
+
+#info {
+  width: 500px;
+  height: 100px;
+  margin-top: 30px;
+  justify-self: center;
+}
+.infoBold,
+.total1,
+.total2 {
+  font-size: 17px;
+  font-weight: bold;
+}
+.total2 {
+  display: flex;
+  justify-content: right;
+  padding-top: 68px;
+}
+.total1 {
+  display: flex;
+  justify-content: right;
+  padding-top: 30px;
+}
+#coupon-sec {
+  display: flex;
+  justify-self: center;
+  padding: 15px;
+  border: 1px solid #46186b;
+}
+#payment-sec {
+  margin: 10px;
+  margin-bottom: 20px;
+}
+
+#coupon-display {
+  margin: 10px;
+  width: 300px;
+}
+
+#applied-coupons-list {
+  margin-top: 30px;
+  margin-left: 20px;
+  width: 200px;
+}
+
+.appliedCoupon {
+  margin: 10px;
+}
+
+.couponbtn {
+  background-color: rgb(221, 163, 221);
+}

@@ -26,7 +26,7 @@ let users = [
     name: "손연서",
     coupon: [
       {
-        id: "coupon-4",
+        id: "1",
         type: "percentage",
         value: 0.1,
         count: 2,
