@@ -1,6 +1,6 @@
 body {
   font-family: arial;
-  background-color: beige;
+  background-color: lightblue;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,13 +23,16 @@ input {
 button {
   width: 100%;
   padding: 10px;
-  background-color: blue;
+  background-color: tomato;
   color: white;
   margin-top: 10px;
   border: none;
+  border-radius: 5px;
 }
 
 #loginMessage {
   margin-top: 10px;
   color: red;
+  font-size: smaller;
+  text-align: center;
 }

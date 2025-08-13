@@ -3,8 +3,8 @@ html {
 }
 #container {
   /*전체 요소 화면 중앙정렬*/
-  height: 100vh;
-  height: 100dvh;
+  /* height: 100vh;
+  height: 100dvh; */
   display: grid;
   place-items: center;
 }
@@ -16,11 +16,14 @@ html {
   border: 0.2rem solid rgb(255, 255, 255);
   text-align: center;
   padding: 0.5rem;
-  background-color: lightblue;
+  background-color: #D4F6FF;
 }
 #infoDiv {
-  border: 1px solid black;
+  background-color: lavender;
+  border-radius: 5px;
   padding: 20px;
+  margin-bottom: 3%;
+  margin-top: 3%;
 }
 #infoTr .ageTd {
   font-weight: bold;
@@ -29,13 +32,41 @@ html {
   width: 22.4rem;
   background-color: lightgray;
   text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  border-radius: 5px;
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 #selectedSeats {
-  height: 2rem;
+  height: 3rem;
   width: 20.5rem;
-  border: 0.1rem solid black;
+  border: 0.1rem solid lightgrey;
+  border-radius: 5px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
 }
 #seats .selectedSeatTd {
   background-color: steelblue;
+  color: white;
+}
+#seatsEnd {
+  margin-left: 79%;
+  margin-top: 10px;
+  padding: 5px;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  background-color: tomato;
   color: white;
 }

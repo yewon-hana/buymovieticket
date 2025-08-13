@@ -24,7 +24,14 @@ html{
     background-color: black;
     color: aliceblue;
     width: 4rem;
+    height: 1.3rem;
+    margin-top: 4px;
+    margin-right: 10px;
     text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
 }
 .numSpan{
     display: inline-block;
@@ -38,10 +45,11 @@ html{
 button{
     width: 1.5rem;
     height: 1.5rem;
-    font-size: 1rem;
+    font-size: small;
     text-align: center;
+    cursor: pointer;
 }
-#toSeat{
-    width: 6rem;
-    margin-top: 20px
+#toSeat {
+    width: 4rem;
+    margin-top: 1rem;
 }

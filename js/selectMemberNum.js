@@ -24,9 +24,9 @@ let toSeat = () => {
   let spanId = [...spanHC].map((span) => ` ${span.innerText}`);
 
   if (spanId[0] == 0 && spanId[1] == 0 && spanId[2] == 0) {
-    alert("관람 인원을 선택하여주세요!");
+    alert("관람 인원을 선택해주세요!");
   } else if (spanId[0] == 0 && spanId[2] == 0 && spanId[1]) {
-    alert("어린이 관객은 성인 보호자가 최소 1명 필요합니다!");
+    alert("어린이는 성인 보호자가 최소 1명 필요합니다!");
   } else {
     selectedMem.adult = spanId[0];
     selectedMem.child = spanId[1];

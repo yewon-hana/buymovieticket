@@ -29,9 +29,10 @@ for (let i = 0; i < 7; i++) {
     const allButtons = document.querySelectorAll(".date-btns");
     allButtons.forEach((b) => {
       b.style.backgroundColor = "#f0f0f0";
+      b.style.color = "black";
     });
-    this.style.backgroundColor = "aliceblue";
-    this.style.color = "black";
+    this.style.backgroundColor = "tomato";
+    this.style.color = "white";
 
     const titleContainer = document.getElementById("titleContainer");
     let h4 = titleContainer.querySelector(".titleSelectTimeTheater");
