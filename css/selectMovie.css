@@ -17,17 +17,21 @@ div {
 #ticket {
   padding-bottom: 2px;
   padding-right: 3px;
-  padding-bottom: 8px;
+  padding-bottom: 6px;
 }
 /* 
 #user {
   display: none;
   padding-bottom: 10px;
 } */
+.logout{
+width:25px;
+}
 
 #login {
   width: 30px;
 }
+
 
 .movies {
   margin-top: 100px;

@@ -29,7 +29,7 @@ function checking() {
   if (loginStatus != "") {
     login.src = "/icons/logout.png";
     login.style.width = "25px";
-    login.style.paddingBottom = "12px";
+    login.style.paddingBottom = "9px";
   } else {
     login.src = "/icons/user_interface.png";
   }
