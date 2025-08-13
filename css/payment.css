@@ -1,5 +1,26 @@
+:root {
+  --main-accent: #ff6b6b; /* tomato 계열로 유지 가능 */
+}
+
+html {
+  background-color: #eaf4ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  color: #222;
+}
+
 #payment-body {
   text-align: center;
+  border-radius: 20px;
+  background-color: white;
+  max-width: 800px;
+  padding: 20px;
+  padding-right: 30px;
+  padding-left: 30px;
 }
 
 #member-count-table {
@@ -9,15 +30,31 @@
   justify-self: center;
 }
 
+.resultNumPrice {
+  margin-top: 40px;
+}
+
 #member-count-table th,
 #member-count-table td {
-  border: 1px solid #46186b;
+  background-color: white;
+  border: 1px solid #d6d6d6;
   padding: 8px;
   text-align: left;
 }
 
 #member-count-table th {
-  background-color: #e1c6ff;
+  background-color: #f7f9fa;
+}
+
+#member-count-table tr:hover {
+  background-color: #e3f2fd;
+}
+
+.selectedMovieInfo {
+  margin-top: 40px;
+  background-color: #f0f4ff;
+  border-radius: 20px;
+  padding: 10px;
 }
 
 #selectedImg {
@@ -32,7 +69,6 @@
 }
 .movie {
   padding: 15px;
-  border: 1px solid #46186b;
   display: flex;
   justify-self: center;
 }
@@ -59,11 +95,16 @@
   justify-content: right;
   padding-top: 30px;
 }
+.couponBox {
+  margin-top: 30px;
+  border: 1px solid lightgray;
+  border-radius: 15px;
+  padding: 10px;
+}
 #coupon-sec {
   display: flex;
   justify-self: center;
   padding: 15px;
-  border: 1px solid #46186b;
 }
 #payment-sec {
   margin: 10px;
@@ -86,5 +127,10 @@
 }
 
 .couponbtn {
-  background-color: rgb(221, 163, 221);
+  background-color: var(--main-accent);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
 }

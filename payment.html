@@ -9,7 +9,7 @@
     <div id = "payment-body">
     <h2>결제 페이지</h2>
     <!-- 관람인 유형, 숫자, 금액 테이블 -->
-    <div>
+    <div class="resultNumPrice">
         <h3>선택 인원 및 금액</h3>
         <table id="member-count-table">
             <thead>
@@ -24,13 +24,16 @@
             </tbody>
         </table>
     </div>
+    <div class="selectedMovieInfo">
     <h3>선택 영화 정보</h3>
     <div class="movie">
  <img id = "selectedImg" src=""/>
     <div id="selMovInfo"></div>
     </div>
+    </div>
     <!--쿠폰 사용 & 취소 버튼-->
-    <h3>쿠폰</h3>
+    <div class="couponBox">
+        <h3>쿠폰</h3>
     <div id="coupon-sec">
         <div id="coupon-display">
         </div>
@@ -40,6 +43,7 @@
 
     <!--총 금액과 할인 정보가 표시될 영역-->
     <div id="info"></div>
+    </div>
     
     <!--결제 방법 선택 영역-->
     <div id="payment-sec">
