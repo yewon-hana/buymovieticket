@@ -31,7 +31,7 @@ for (let i = 0; i < 7; i++) {
       b.style.backgroundColor = "#f0f0f0";
       b.style.color = "black";
     });
-    this.style.backgroundColor = "tomato";
+    this.style.backgroundColor ="#ff6b6b";
     this.style.color = "white";
 
     const titleContainer = document.getElementById("titleContainer");
